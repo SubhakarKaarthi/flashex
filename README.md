@@ -46,7 +46,7 @@ The generated artifact is located in `flashex/flashex-0.0.1.vsix`.
 ## Install the extension
 
 1. Download the VSIX from the GitHub Releases page:
-   https://github.com/SubhakarKaarthi/autoex/releases
+   https://github.com/SubhakarKaarthi/flashex/releases
 2. Place the file in your Arduino IDE plugin folder:
    `~/.arduinoIDE/plugins/`
 3. Open the command palette with `Ctrl+Shift+P`
@@ -75,6 +75,6 @@ For Vercel, set the project root directory to `site` and use the default static-
 
 ## Links
 
-- GitHub repository: https://github.com/SubhakarKaarthi/autoex
-- Releases: https://github.com/SubhakarKaarthi/autoex/releases
-- Extension README: https://github.com/SubhakarKaarthi/autoex/blob/main/flashex/README.md
+- GitHub repository: https://github.com/SubhakarKaarthi/flashex
+- Releases: https://github.com/SubhakarKaarthi/flashex/releases
+- Extension README: https://github.com/SubhakarKaarthi/flashex/blob/main/flashex/README.md
