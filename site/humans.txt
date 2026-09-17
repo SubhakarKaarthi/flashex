@@ -1,0 +1,7 @@
+/* TEAM */
+Project: FlashEx
+Repository: https://github.com/SubhakarKaarthi/flashex
+
+/* SITE */
+Standards-first static PWA for AI-assisted Arduino project scaffolding.
+Built with semantic HTML, CSS, and vanilla JavaScript.

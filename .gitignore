@@ -1,0 +1,27 @@
+# Dependencies and build output
+node_modules/
+**/node_modules/
+out/
+dist/
+.vscode-test/
+*.vsix
+*.map
+
+# Local browser/runtime downloads
+chrome/
+
+# Local environment and editor files
+.env
+.env.*
+!.env.example
+.DS_Store
+.vscode/
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
+
+# Temporary logs and reports
+*.log
+coverage/
+reports/

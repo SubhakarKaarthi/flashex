@@ -1,0 +1,68 @@
+name: Validate FlashEx
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  extension:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: flashex
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: flashex/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Compile
+        run: npm run compile
+      - name: Lint
+        run: npm run lint
+
+  website:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Validate website assets
+        run: |
+          node --check site/app.js
+          python3 - <<'PY'
+          import json
+          import xml.etree.ElementTree as ET
+          from html.parser import HTMLParser
+          from pathlib import Path
+
+          site = Path('site')
+          required = ['index.html', '404.html', 'manifest.webmanifest', 'robots.txt', 'sitemap.xml', 'privacy-policy.html', 'terms.html', 'licenses.html', 'llms.txt', 'vercel.json']
+          assert all((site / path).is_file() for path in required)
+          json.loads((site / 'manifest.webmanifest').read_text())
+          json.loads((site / 'vercel.json').read_text())
+          ET.parse(site / 'sitemap.xml')
+
+          class PageParser(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.main_count = 0
+              def handle_starttag(self, tag, attrs):
+                  if tag == 'main':
+                      self.main_count += 1
+
+          parser = PageParser()
+          parser.feed((site / 'index.html').read_text())
+          assert parser.main_count == 1
+          assert 'https://flashex.vercel.app/' in (site / 'index.html').read_text()
+          assert 'Sitemap:' in (site / 'robots.txt').read_text()
+          print('website_validation_ok')
+          PY

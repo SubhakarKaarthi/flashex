@@ -1,0 +1,23 @@
+# FlashEx
+
+> FlashEx turns natural-language hardware ideas into ready-to-run Arduino project scaffolds.
+
+## Product
+
+FlashEx is an open-source developer tool for Arduino IDE 2.x. It uses AI-assisted planning to create a project workspace, write an Arduino sketch, and install the Arduino CLI cores and libraries needed by the requested setup.
+
+## Primary pages
+
+- [Home](https://flashex.vercel.app/): Product overview, browser demo, and installation flow.
+- [Privacy Policy](https://flashex.vercel.app/privacy-policy.html): Data handling and privacy information.
+- [Terms and Conditions](https://flashex.vercel.app/terms.html): Usage terms and product limitations.
+- [Licenses](https://flashex.vercel.app/licenses.html): Open-source and dependency licensing notes.
+- [Documentation](https://github.com/SubhakarKaarthi/flashex/blob/main/README.md): Setup and development documentation.
+- [Source repository](https://github.com/SubhakarKaarthi/flashex): Source code, issues, and releases.
+
+## Important facts
+
+- FlashEx supports Windows, macOS, and Linux through the Arduino IDE workflow.
+- Arduino CLI must be available on the user's PATH.
+- Generated code is a starting point and must be reviewed before production or safety-critical use.
+- The current extension version shown on the website is 0.0.1.
