@@ -700,6 +700,7 @@ button:focus-visible, a:focus-visible {
   font: 700 9px "DM Sans", sans-serif;
   letter-spacing: 0.13em;
 }
+:root[data-theme="dark"] .step-number span { color: #c9d5e3; }
 .step-icon {
   display: grid;
   place-items: center;
@@ -744,6 +745,7 @@ button:focus-visible, a:focus-visible {
   font-size: 10px;
   font-weight: 700;
 }
+:root[data-theme="dark"] .card-foot { color: #c9d5e3; }
 .led.green { background: #46b57e; }
 .led.amber { background: #d6a11a; }
 
@@ -789,6 +791,7 @@ button:focus-visible, a:focus-visible {
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
+:root[data-theme="dark"] .install-card-header { color: #c9d5e3; }
 .folder-icon { color: var(--accent); font-size: 18px; }
 .guide-version { margin-left: auto; color: #9aa4ab; }
 .install-steps {
@@ -839,6 +842,11 @@ button:focus-visible, a:focus-visible {
   background: rgba(255, 255, 255, 0.7);
   color: var(--ink);
   font-size: 10px;
+}
+:root[data-theme="dark"] .install-steps kbd {
+  border-color: rgba(226, 237, 249, 0.28);
+  background: #26374d;
+  color: #f4f7fb;
 }
 .install-steps b { padding: 0 3px; color: #8a97a3; font-weight: 400; }
 .install-note {
