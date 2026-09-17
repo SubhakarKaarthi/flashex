@@ -1,0 +1,21 @@
+{
+  "name": "flashex-site",
+  "version": "1.0.0",
+  "description": "FlashEx landing page and documentation site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "python3 -m http.server 4173",
+    "postinstall": "mkdir -p vendor && cp node_modules/@vercel/speed-insights/dist/index.mjs vendor/speed-insights.mjs"
+  },
+  "keywords": [
+    "flashex",
+    "arduino",
+    "hardware"
+  ],
+  "author": "FlashEx",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  }
+}

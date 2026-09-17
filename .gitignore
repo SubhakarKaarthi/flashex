@@ -6,6 +6,7 @@ dist/
 .vscode-test/
 *.vsix
 *.map
+site/vendor/
 
 # Local browser/runtime downloads
 chrome/
