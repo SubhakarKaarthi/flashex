@@ -1,14 +1,30 @@
 {
   "name": "flashex",
-  "displayName": "flashex",
-  "description": "arduino ide  auto extensions",
+  "displayName": "FlashEx",
+  "description": "Turn natural-language hardware ideas into Arduino project scaffolds with Gemini-assisted planning.",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.136.0"
   },
   "categories": [
-    "Other"
+    "Other",
+    "Programming Languages"
   ],
+  "keywords": [
+    "Arduino",
+    "hardware",
+    "embedded",
+    "Gemini",
+    "project scaffolding"
+  ],
+  "homepage": "https://flashex.vercel.app/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SubhakarKaarthi/flashex.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SubhakarKaarthi/flashex/issues"
+  },
   "activationEvents": [
     "onCommand:flashex.setupProject"
   ],

@@ -10,6 +10,11 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Initial FlashEx extension release workflow.
 
+### Fixed
+
+- Restored complete test compilation by declaring the Gemini SDK peer dependency.
+- Removed avoidable optional websocket bundling warnings.
+
 ## [0.0.1] - 2026-09-17
 
 ### Added

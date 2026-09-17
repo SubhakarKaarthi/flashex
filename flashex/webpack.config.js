@@ -3,6 +3,7 @@
 'use strict';
 
 const path = require('path');
+const webpack = require('webpack');
 
 //@ts-check
 /** @typedef {import('webpack').Configuration} WebpackConfig **/
@@ -40,6 +41,9 @@ const extensionConfig = {
       }
     ]
   },
+  plugins: [
+    new webpack.IgnorePlugin({ resourceRegExp: /^(bufferutil|utf-8-validate)$/ })
+  ],
   devtool: 'nosources-source-map',
   infrastructureLogging: {
     level: "log", // enables logging required for problem matchers
