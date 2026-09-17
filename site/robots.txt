@@ -2,4 +2,3 @@ User-agent: *
 Allow: /
 
 Sitemap: https://flashex.vercel.app/sitemap.xml
-Sitemap: https://www.uvtechstore.in/sitemap.xml

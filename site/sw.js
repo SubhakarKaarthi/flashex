@@ -1,4 +1,4 @@
-const CACHE_NAME = 'flashex-shell-v2';
+const CACHE_NAME = 'flashex-shell-v3';
 const APP_SHELL = [
   './',
   './index.html',
@@ -6,6 +6,8 @@ const APP_SHELL = [
   './terms.html',
   './licenses.html',
   './style.css',
+  './fonts/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K4.woff2',
+  './fonts/V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2',
   './app.js',
   './manifest.webmanifest',
   './icons/icon-192.png',
