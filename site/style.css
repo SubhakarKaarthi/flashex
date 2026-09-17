@@ -35,17 +35,17 @@
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #151c27;
-  --bg-strong: #1c2633;
-  --panel: rgba(18, 26, 34, 0.8);
-  --panel-solid: #1a2330;
-  --ink: #edf3ff;
-  --muted: #a6b3be;
-  --accent: #7bb5ff;
-  --accent-strong: #98c6ff;
-  --accent-soft: rgba(123, 181, 255, 0.12);
-  --success: #87d7ac;
-  --line: rgba(237, 243, 255, 0.09);
+  --bg: #101722;
+  --bg-strong: #182333;
+  --panel: rgba(25, 37, 53, 0.94);
+  --panel-solid: #1b2a3d;
+  --ink: #f4f7fb;
+  --muted: #c1ccda;
+  --accent: #8fc4ff;
+  --accent-strong: #b4d8ff;
+  --accent-soft: rgba(143, 196, 255, 0.16);
+  --success: #94e0b7;
+  --line: rgba(226, 237, 249, 0.18);
   --shadow: 0 24px 44px rgba(0, 0, 0, 0.28), 0 5px 12px rgba(0, 0, 0, 0.18);
 }
 
@@ -119,6 +119,35 @@ button:focus-visible, a:focus-visible {
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.75);
   box-shadow: var(--shadow);
+}
+
+:root[data-theme="dark"] .legal-card,
+:root[data-theme="dark"] .step-card,
+:root[data-theme="dark"] .install-card,
+:root[data-theme="dark"] .faq-list details,
+:root[data-theme="dark"] .requirements-grid > div,
+:root[data-theme="dark"] .button-quiet {
+  background: var(--panel-solid);
+  border-color: var(--line);
+}
+
+:root[data-theme="dark"] .legal-card p,
+:root[data-theme="dark"] .legal-card li,
+:root[data-theme="dark"] .legal-card dd,
+:root[data-theme="dark"] .legal-card dt {
+  color: var(--muted);
+}
+
+:root[data-theme="dark"] .legal-card a,
+:root[data-theme="dark"] .text-link,
+:root[data-theme="dark"] .install-steps a {
+  color: var(--accent);
+}
+
+:root[data-theme="dark"] .theme-toggle,
+:root[data-theme="dark"] .button-quiet {
+  color: var(--ink);
+  background: rgba(27, 42, 61, 0.9);
 }
 
 .legal-card h1 {

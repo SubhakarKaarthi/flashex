@@ -6,7 +6,7 @@
   <meta name="description" content="Terms and Conditions for FlashEx, including usage expectations, project generation, and legal limitations.">
   <meta name="robots" content="index, follow, max-snippet:-1">
   <meta name="theme-color" content="#1f5a95">
-  <link rel="canonical" href="https://flashex.vercel.app/terms.html">
+  <link rel="canonical" href="https://flashex.vercel.app/terms">
   <title>Terms and Conditions | FlashEx</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/icon-192.png" type="image/png">
@@ -20,12 +20,13 @@
         <span>Flash<span>Ex</span></span>
       </a>
       <nav class="main-nav" aria-label="Primary navigation">
-        <a href="index.html#how-it-works">How it works</a>
-        <a href="index.html#install">Install</a>
+        <a href="/#how-it-works">How it works</a>
+        <a href="/#install">Install</a>
         <a href="privacy-policy.html">Privacy</a>
         <a href="terms.html">Terms</a>
       </nav>
-      <a class="button button-small button-primary" href="index.html">Back to site</a>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode"><span class="theme-icon theme-icon-sun" aria-hidden="true">☼</span><span class="theme-icon theme-icon-moon" aria-hidden="true">☾</span></button>
+      <a class="button button-small button-primary" href="/">Back to site</a>
     </header>
 
     <main class="legal-wrapper">
@@ -60,5 +61,14 @@
       </article>
     </main>
   </div>
+  <script>
+    (() => {
+      try {
+        const savedTheme = localStorage.getItem('flashex-theme');
+        if (savedTheme === 'dark' || savedTheme === 'light') document.documentElement.dataset.theme = savedTheme;
+      } catch {}
+    })();
+  </script>
+  <script defer src="app.js"></script>
 </body>
 </html>

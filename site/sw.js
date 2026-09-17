@@ -14,6 +14,15 @@ const APP_SHELL = [
   './icons/icon-512.png'
 ];
 
+const OFFLINE_ROUTES = {
+  '/privacy-policy.html': './privacy-policy.html',
+  '/privacy-policy': './privacy-policy.html',
+  '/terms.html': './terms.html',
+  '/terms': './terms.html',
+  '/licenses.html': './licenses.html',
+  '/licenses': './licenses.html'
+};
+
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)).then(() => self.skipWaiting())
@@ -47,7 +56,8 @@ self.addEventListener('fetch', (event) => {
         return response;
       }).catch(() => {
         if (event.request.mode === 'navigate') {
-          return caches.match('./index.html');
+          const route = new URL(event.request.url).pathname;
+          return caches.match(OFFLINE_ROUTES[route] || './index.html');
         }
         return new Response('Offline — FlashEx shell is unavailable. Please reconnect to the internet and retry.', { status: 503, statusText: 'Offline' });
       });
