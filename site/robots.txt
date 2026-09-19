@@ -1,4 +1,26 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://flashex.vercel.app/sitemap.xml
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+User-agent: PetalBot
+Allow: /
+
+Sitemap: https://uvtechstore.in/sitemap.xml
+Host: uvtechstore.in

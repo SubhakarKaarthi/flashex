@@ -1,5 +1,5 @@
 Contact: https://github.com/SubhakarKaarthi/flashex/security
 Policy: https://github.com/SubhakarKaarthi/flashex/security/policy
 Preferred-Languages: en
-Canonical: https://flashex.vercel.app/.well-known/security.txt
+Canonical: https://uvtechstore.in/.well-known/security.txt
 Expires: 2027-09-17T00:00:00.000Z

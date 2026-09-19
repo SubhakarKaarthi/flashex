@@ -4,10 +4,26 @@
   "redirects": [
     {
       "source": "/:path*",
-      "destination": "https://flashex.vercel.app/:path*",
+      "destination": "https://uvtechstore.in/:path*",
       "permanent": true,
       "has": [
         { "type": "host", "value": "www.uvtechstore.in" }
+      ]
+    },
+    {
+      "source": "/:path*",
+      "destination": "https://uvtechstore.in/:path*",
+      "permanent": true,
+      "has": [
+        { "type": "host", "value": "uvtechstore.in" }
+      ]
+    },
+    {
+      "source": "/:path*",
+      "destination": "https://uvtechstore.in/:path*",
+      "permanent": true,
+      "has": [
+        { "type": "host", "value": "flashex.vercel.app" }
       ]
     }
   ],
