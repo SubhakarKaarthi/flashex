@@ -1,0 +1,70 @@
+name: SEO automation
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 3 * * 1'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  validate-and-submit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run SEO validation
+        run: python3 site/tools/validate_seo.py
+
+      - name: Submit sitemaps to search engines
+        if: github.ref == 'refs/heads/main'
+        env:
+          SITE_URL: https://www.uvtechstore.in
+          GSC_PING_URL: ${{ secrets.GSC_PING_URL }}
+          BING_PING_URL: ${{ secrets.BING_PING_URL }}
+          YANDEX_SUBMIT_URL: ${{ secrets.YANDEX_SUBMIT_URL }}
+          YANDEX_TOKEN: ${{ secrets.YANDEX_TOKEN }}
+          NAVER_SUBMIT_URL: ${{ secrets.NAVER_SUBMIT_URL }}
+          NAVER_TOKEN: ${{ secrets.NAVER_TOKEN }}
+          BAIDU_SUBMIT_URL: ${{ secrets.BAIDU_SUBMIT_URL }}
+          BAIDU_TOKEN: ${{ secrets.BAIDU_TOKEN }}
+        run: python3 site/tools/submit_sitemap.py
+
+      - name: Refresh SEO dashboard
+        env:
+          GSC_TOKEN: ${{ secrets.GSC_TOKEN }}
+          BING_TOKEN: ${{ secrets.BING_TOKEN }}
+          GA4_SERVICE_ACCOUNT_JSON: ${{ secrets.GA4_SERVICE_ACCOUNT_JSON }}
+          PAGESPEED_API_KEY: ${{ secrets.PAGESPEED_API_KEY }}
+        run: python3 site/tools/seo_dashboard.py
+
+      - name: Create optimization PR
+        id: pr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: 'chore: refresh SEO monitoring dashboard'
+          title: 'SEO monitoring refresh'
+          body: |
+            ## Summary
+            - refresh the SEO dashboard with the latest monitoring status
+            - keep canonical and sitemap checks aligned with the production domain
+            - capture follow-up actions for search console and performance regressions
+          branch: seo-monitoring-update
+          delete-branch: true
+          add-paths: |
+            site/seo-dashboard.md
+            site/tools/*.py
+
+      - name: Skip PR creation when no update is needed
+        if: steps.pr.outputs.pull-request-number == ''
+        run: echo 'No SEO dashboard update was needed.'

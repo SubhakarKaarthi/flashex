@@ -1,7 +1,7 @@
-import { exec } from 'child_process';
+import { execFile } from 'child_process';
 import * as vscode from 'vscode';
 
-interface ProjectRequirements {
+export interface ProjectRequirements {
 	requiredVsCodeExtensions: string[];
 	requiredArduinoLibs: string[];
 	requiredArduinoCores: string[];
@@ -10,6 +10,29 @@ interface ProjectRequirements {
 }
 
 const apiKeySecretName = 'flashex.geminiApiKey';
+const shellInjectionPattern = /[;&|$`<>\\\n\r]/;
+const extensionIdPattern = /^[A-Za-z0-9][A-Za-z0-9.-]*\.[A-Za-z0-9][A-Za-z0-9.-]*$/;
+const safeDependencyPattern = /^[A-Za-z0-9][A-Za-z0-9 _./:-]*$/;
+
+export function isSafeDependencyName(value: string, kind: 'extension' | 'library' | 'core'): boolean {
+	if (typeof value !== 'string' || value.trim().length === 0) {
+		return false;
+	}
+
+	if (shellInjectionPattern.test(value) || value.includes('..')) {
+		return false;
+	}
+
+	switch (kind) {
+		case 'extension':
+			return extensionIdPattern.test(value);
+		case 'library':
+		case 'core':
+			return safeDependencyPattern.test(value);
+		default:
+			return false;
+	}
+}
 
 async function getApiKey(context: vscode.ExtensionContext): Promise<string | undefined> {
 	let apiKey = await context.secrets.get(apiKeySecretName);
@@ -32,24 +55,25 @@ async function getApiKey(context: vscode.ExtensionContext): Promise<string | und
 	return apiKey;
 }
 
-function isProjectRequirements(value: unknown): value is ProjectRequirements {
+export function isProjectRequirements(value: unknown): value is ProjectRequirements {
 	if (!value || typeof value !== 'object') {
 		return false;
 	}
 
 	const requirements = value as Record<string, unknown>;
 	const arrayFields = [
-		requirements.requiredVsCodeExtensions,
-		requirements.requiredArduinoLibs,
-		requirements.requiredArduinoCores,
-	];
+		['extension', requirements.requiredVsCodeExtensions],
+		['library', requirements.requiredArduinoLibs],
+		['core', requirements.requiredArduinoCores],
+	] as const;
 
-	return arrayFields.every(
-		(field) => Array.isArray(field) && field.every((item) => typeof item === 'string')
+	return arrayFields.every(([kind, field]) =>
+		Array.isArray(field) && field.every((item) => typeof item === 'string' && isSafeDependencyName(item, kind))
 	)
 		&& typeof requirements.projectName === 'string'
 		&& /^[a-z0-9_]+$/.test(requirements.projectName)
-		&& typeof requirements.sketchCode === 'string';
+		&& typeof requirements.sketchCode === 'string'
+		&& requirements.sketchCode.length <= 200000;
 }
 
 async function getProjectRequirements(prompt: string, apiKey: string): Promise<ProjectRequirements> {
@@ -90,9 +114,9 @@ async function getProjectRequirements(prompt: string, apiKey: string): Promise<P
 	return payload;
 }
 
-function runArduinoCli(command: string): Promise<void> {
+function runArduinoCli(args: string[]): Promise<void> {
 	return new Promise((resolve, reject) => {
-		exec(command, (error, _stdout, stderr) => {
+		execFile('arduino-cli', args, { shell: false }, (error, _stdout, stderr) => {
 			if (error) {
 				reject(new Error(stderr.trim() || error.message));
 				return;
@@ -142,9 +166,14 @@ async function installDependencies(requirements: ProjectRequirements): Promise<v
 	}
 
 	for (const library of requirements.requiredArduinoLibs) {
+		if (!isSafeDependencyName(library, 'library')) {
+			vscode.window.showErrorMessage(`Rejected unsafe Arduino library name: ${library}`);
+			continue;
+		}
+
 		vscode.window.showInformationMessage(`Installing Arduino library: ${library}`);
 		try {
-			await runArduinoCli(`arduino-cli lib install "${library}"`);
+			await runArduinoCli(['lib', 'install', library]);
 			vscode.window.showInformationMessage(`Installed Arduino library: ${library}`);
 		} catch (error) {
 			const message = error instanceof Error ? error.message : String(error);
@@ -155,9 +184,14 @@ async function installDependencies(requirements: ProjectRequirements): Promise<v
 	}
 
 	for (const core of requirements.requiredArduinoCores) {
+		if (!isSafeDependencyName(core, 'core')) {
+			vscode.window.showErrorMessage(`Rejected unsafe Arduino core name: ${core}`);
+			continue;
+		}
+
 		vscode.window.showInformationMessage(`Installing Arduino core: ${core}`);
 		try {
-			await runArduinoCli(`arduino-cli core install "${core}"`);
+			await runArduinoCli(['core', 'install', core]);
 			vscode.window.showInformationMessage(`Installed Arduino core: ${core}`);
 		} catch (error) {
 			const message = error instanceof Error ? error.message : String(error);

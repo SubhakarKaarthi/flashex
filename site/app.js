@@ -1,3 +1,7 @@
+import { injectSpeedInsights } from '@vercel/speed-insights';
+
+injectSpeedInsights();
+
 const logItems = [...document.querySelectorAll('.log-item')];
 const currentYear = document.querySelector('#current-year');
 const themeToggle = document.querySelector('.theme-toggle');
@@ -13,6 +17,13 @@ const demoSketch = document.querySelector('#demo-sketch');
 const demoLibraries = document.querySelector('#demo-libraries');
 const demoCode = document.querySelector('#demo-code code');
 let deferredPrompt = null;
+
+try {
+  const savedTheme = localStorage.getItem('flashex-theme');
+  if (savedTheme === 'dark' || savedTheme === 'light') {
+    document.documentElement.dataset.theme = savedTheme;
+  }
+} catch {}
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {

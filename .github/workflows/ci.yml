@@ -68,7 +68,8 @@ jobs:
           parser = PageParser()
           parser.feed((site / 'index.html').read_text())
           assert parser.main_count == 1
-          assert 'https://flashex.vercel.app/' in (site / 'index.html').read_text()
+          assert 'https://uvtechstore.in/' in (site / 'index.html').read_text()
           assert 'Sitemap:' in (site / 'robots.txt').read_text()
+          assert 'https://uvtechstore.in/' not in (site / 'vercel.json').read_text() or 'https://uvtechstore.in/:path*' in (site / 'vercel.json').read_text()
           print('website_validation_ok')
           PY

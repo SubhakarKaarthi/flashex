@@ -1,0 +1,14 @@
+{
+  "name": "flashex-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "esbuild app.js --bundle --minify --outfile=app.bundle.js"
+  },
+  "dependencies": {
+    "@vercel/speed-insights": "latest"
+  },
+  "devDependencies": {
+    "esbuild": "latest"
+  }
+}

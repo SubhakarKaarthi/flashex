@@ -8,10 +8,10 @@ FlashEx is an open-source developer tool for Arduino IDE 2.x. It uses AI-assiste
 
 ## Primary pages
 
-- [Home](https://flashex.vercel.app/): Product overview, browser demo, and installation flow.
-- [Privacy Policy](https://flashex.vercel.app/privacy-policy.html): Data handling and privacy information.
-- [Terms and Conditions](https://flashex.vercel.app/terms.html): Usage terms and product limitations.
-- [Licenses](https://flashex.vercel.app/licenses.html): Open-source and dependency licensing notes.
+- [Home](https://uvtechstore.in/): Product overview, browser demo, and installation flow.
+- [Privacy Policy](https://uvtechstore.in/privacy-policy): Data handling and privacy information.
+- [Terms and Conditions](https://uvtechstore.in/terms): Usage terms and product limitations.
+- [Licenses](https://uvtechstore.in/licenses): Open-source and dependency licensing notes.
 - [Documentation](https://github.com/SubhakarKaarthi/flashex/blob/main/README.md): Setup and development documentation.
 - [Source repository](https://github.com/SubhakarKaarthi/flashex): Source code, issues, and releases.
 
