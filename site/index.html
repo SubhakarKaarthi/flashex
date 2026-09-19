@@ -90,16 +90,6 @@
     ]
   }
   </script>
-  <script>
-    (() => {
-      try {
-        const savedTheme = localStorage.getItem('flashex-theme');
-        if (savedTheme === 'dark' || savedTheme === 'light') {
-          document.documentElement.dataset.theme = savedTheme;
-        }
-      } catch {}
-    })();
-  </script>
   <link rel="stylesheet" href="style.css">
   <script defer src="app.bundle.js"></script>
 </head>

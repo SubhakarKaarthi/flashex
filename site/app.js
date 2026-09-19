@@ -18,6 +18,13 @@ const demoLibraries = document.querySelector('#demo-libraries');
 const demoCode = document.querySelector('#demo-code code');
 let deferredPrompt = null;
 
+try {
+  const savedTheme = localStorage.getItem('flashex-theme');
+  if (savedTheme === 'dark' || savedTheme === 'light') {
+    document.documentElement.dataset.theme = savedTheme;
+  }
+} catch {}
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js').catch((error) => {
