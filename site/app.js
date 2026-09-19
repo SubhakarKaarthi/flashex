@@ -1,3 +1,7 @@
+import { injectSpeedInsights } from '@vercel/speed-insights';
+
+injectSpeedInsights();
+
 const logItems = [...document.querySelectorAll('.log-item')];
 const currentYear = document.querySelector('#current-year');
 const themeToggle = document.querySelector('.theme-toggle');
